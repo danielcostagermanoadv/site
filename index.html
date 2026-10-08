@@ -18,7 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Daniel Costa Germano Advocacia", "legalName": "Daniel Costa Germano Sociedade Individual de Advocacia", "taxID": "42.229.009/0001-19", "url": "https://danielcostagermano.adv.br/", "email": "contato@danielcostagermano.adv.br", "description": "Escritório de advocacia em Londrina/PR. Defesa de empresas, sócios, administradores e garantidores em execuções bancárias e fiscais, constrições patrimoniais, responsabilidade pessoal e matéria penal tributária e empresarial. OAB/PR 59.101.", "address": {"@type": "PostalAddress", "streetAddress": "Av. Higienópolis, 32, Sala 801, Centro", "addressLocality": "Londrina", "addressRegion": "PR", "postalCode": "86020-080", "addressCountry": "BR"}, "areaServed": "BR", "founder": {"@type": "Person", "name": "Daniel Costa Germano", "jobTitle": "Advogado"}, "sameAs": ["https://www.linkedin.com/in/daniel-costa-germano-81b609210/"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LegalService", "name": "Daniel Costa Germano Advocacia", "legalName": "Daniel Costa Germano Sociedade Individual de Advocacia", "taxID": "42.229.009/0001-19", "url": "https://danielcostagermano.adv.br/", "email": "contato@danielcostagermano.adv.br", "telephone": "+55 43 99182-9593", "description": "Escritório de advocacia em Londrina/PR. Defesa de empresas, sócios, administradores e garantidores em execuções bancárias e fiscais, constrições patrimoniais, responsabilidade pessoal e matéria penal tributária e empresarial. OAB/PR 59.101.", "address": {"@type": "PostalAddress", "streetAddress": "Av. Higienópolis, 32, Sala 801, Centro", "addressLocality": "Londrina", "addressRegion": "PR", "postalCode": "86020-080", "addressCountry": "BR"}, "areaServed": "BR", "founder": {"@type": "Person", "name": "Daniel Costa Germano", "jobTitle": "Advogado"}, "sameAs": ["https://www.linkedin.com/in/daniel-costa-germano-81b609210/"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap">
@@ -205,12 +205,19 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
 .ficha dd { font-size: 1rem; }
 
 /* Contato */
-.canais { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px clamp(28px, 4vw, 56px); }
+.canais { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px clamp(28px, 4vw, 56px); }
 .canal { display: flex; flex-direction: column; gap: 10px; min-width: 0; border-top: 2px solid var(--cobre); padding-top: 22px; }
 .canal p { overflow-wrap: anywhere; }
 .canal .valor { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
 .canal a.fino { font-size: 0.9375rem; color: var(--cobre-escuro); text-underline-offset: 4px; align-self: flex-start; }
 .canal a.fino:hover { color: var(--tinta); }
+
+/* WhatsApp fixo no celular */
+.zap { display: none; }
+@media (max-width: 720px) {
+  .zap { display: inline-flex; align-items: center; gap: 8px; position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 20; background: var(--cobre); color: var(--marfim); text-decoration: none; padding: 12px 18px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(35, 35, 37, 0.28); }
+  .rodape .wrap { padding-bottom: 96px; }
+}
 
 /* Rodapé */
 .rodape { background: var(--grafite); color: var(--marfim-2); }
@@ -637,6 +644,11 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
       </div>
       <div class="canais">
         <div class="canal">
+          <p class="rotulo">Telefone e WhatsApp</p>
+          <p class="valor">(43) 99182-9593</p>
+          <a class="fino" href="https://wa.me/5543991829593" target="_blank" rel="noopener">Abrir no WhatsApp</a>
+        </div>
+        <div class="canal">
           <p class="rotulo">Endereço</p>
           <p class="valor">Av. Higienópolis, 32, Sala 801</p>
           <p>Centro, Londrina/PR<br> CEP 86020-080</p>
@@ -667,6 +679,8 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
     </div>
   </div>
 </footer>
+
+<a class="zap" href="https://wa.me/5543991829593" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp">WhatsApp</a>
 
 <script>
 (function () {
