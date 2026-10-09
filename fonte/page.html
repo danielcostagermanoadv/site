@@ -1,0 +1,719 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: folha de rosto em grafite, corpo em papel, faixas escuras alternadas. A cadeia da dívida (da empresa aos reflexos penais) abre a seção de atuação. */
+:root {
+  --grafite: #232325;
+  --papel: #F6F4F0;
+  --papel-2: #ECE8E1;
+  --cobre: #9A714C;
+  --cobre-claro: #C39A72;
+  --cobre-escuro: #7F5A38;
+  --tinta: #232325;
+  --tinta-2: #4A4743;
+  --marfim: #F4F1EB;
+  --marfim-2: #C9C5BE;
+  --marfim-3: #D8D4CC;
+  --linha: #CFC8BD;
+  --linha-escura: #4E4A45;
+  --display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --texto: 'Jost', 'Avenir Next', 'Century Gothic', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --largura: 1120px;
+  --calha: clamp(20px, 5vw, 48px);
+  --barra: 64px;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--barra) + 16px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--cobre-claro); outline-offset: 4px; border-radius: 2px; }
+h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+.wrap { max-width: var(--largura); margin-inline: auto; padding-inline: var(--calha); }
+
+.rotulo {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cobre-escuro);
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; }
+h2 { font-size: clamp(2.125rem, 4vw, 3.125rem); line-height: 1.06; }
+h3 { font-size: clamp(1.625rem, 2.4vw, 2rem); line-height: 1.1; }
+.texto { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.texto p { color: var(--tinta-2); max-width: 40em; }
+
+/* Barra fixa */
+.barra {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: rgba(35, 35, 37, 0.94);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linha-escura);
+  color: var(--marfim);
+}
+.barra .wrap { min-height: var(--barra); display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; }
+.marca { flex: none; }
+.marca img { width: clamp(190px, 24vw, 260px); }
+.menu { display: flex; align-items: center; gap: 6px clamp(14px, 2.4vw, 30px); }
+.menu a {
+  display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none; color: var(--marfim-2); padding-block: 8px; border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.menu a:hover, .menu a[aria-current="true"] { color: var(--marfim); border-bottom-color: var(--cobre-claro); }
+.menu .destaque a { color: var(--cobre-claro); }
+.menu .destaque a:hover, .menu .destaque a[aria-current="true"] { color: var(--marfim); }
+
+/* Folha de rosto */
+.hero { background: var(--grafite); color: var(--marfim); }
+.hero .wrap { display: flex; flex-direction: column; gap: clamp(48px, 7vw, 88px); padding-block: clamp(56px, 9vw, 112px) clamp(44px, 6vw, 72px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 48px clamp(40px, 6vw, 96px); align-items: end; }
+.hero-texto { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+.hero .rotulo { color: var(--cobre-claro); }
+.filete { width: 96px; height: 2px; background: var(--cobre); transform-origin: left center; animation: filete 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes filete { from { transform: scaleX(0.15); } to { transform: scaleX(1); } }
+h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: -0.005em; color: var(--marfim); }
+.lead { max-width: 33em; font-size: clamp(1.125rem, 1.7vw, 1.3125rem); font-weight: 300; line-height: 1.5; color: var(--marfim-3); }
+
+.indice { min-width: 0; }
+.indice li { border-top: 1px solid var(--linha-escura); }
+.indice li:last-child { border-bottom: 1px solid var(--linha-escura); }
+.indice a {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding-block: 16px; text-decoration: none; font-size: 1.0625rem; font-weight: 300; color: #E6E2DA;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+.indice a::after { content: '\2192'; color: var(--cobre-claro); }
+.indice a:hover { color: var(--marfim); padding-left: 6px; }
+
+.assinatura { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--marfim-2); }
+.assinatura b { font-weight: 500; color: var(--cobre-claro); }
+
+/* Faixas */
+.faixa { padding-block: clamp(64px, 9vw, 120px); }
+.faixa > .wrap { display: flex; flex-direction: column; gap: clamp(36px, 5vw, 60px); }
+.faixa.tom { background: var(--papel-2); }
+.faixa.escura { background: var(--grafite); color: var(--marfim); }
+.escura .rotulo { color: var(--cobre-claro); }
+.escura h2, .escura h3 { color: var(--marfim); }
+.escura .texto p, .escura .cabeca p:not(.rotulo) { color: var(--marfim-3); font-weight: 300; }
+.cabeca { display: flex; flex-direction: column; gap: 18px; max-width: 46rem; }
+.cabeca p:not(.rotulo) { font-size: 1.125rem; color: var(--tinta-2); max-width: 38em; }
+.duas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); gap: 32px clamp(32px, 6vw, 88px); align-items: start; }
+
+/* Cadeia da dívida */
+.cadeia { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); counter-reset: elo; }
+.cadeia li { position: relative; padding-top: 30px; padding-right: 10px; min-width: 0; font-size: 0.9375rem; line-height: 1.3; color: var(--tinta); }
+.cadeia li::before { content: ''; position: absolute; top: 5px; left: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--papel); border: 2px solid var(--cobre); z-index: 1; }
+.cadeia li::after { content: ''; position: absolute; top: 10px; left: 11px; right: 0; height: 1px; background: var(--cobre); }
+.cadeia li:last-child::after { display: none; }
+.cadeia li:last-child { color: var(--cobre-escuro); font-weight: 500; }
+.cadeia li:last-child::before { background: var(--cobre); }
+
+/* Frentes */
+.frentes { display: flex; flex-direction: column; }
+.frente { padding-block: clamp(28px, 4vw, 44px); border-top: 1px solid var(--linha); scroll-margin-top: calc(var(--barra) + 16px); }
+.frente:first-child { border-top: 2px solid var(--cobre); }
+.frente:last-child { border-bottom: 1px solid var(--linha); }
+.frente .rotulo { margin-bottom: 10px; display: block; }
+.vias { max-width: 46rem; font-size: 1rem; color: var(--tinta-2); border-left: 2px solid var(--cobre); padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+
+/* Situações */
+.situacoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(32px, 5vw, 72px); }
+.situacoes li { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-block: 22px; border-top: 1px solid var(--linha); }
+.situacoes .rotulo { font-size: 0.72rem; letter-spacing: 0.2em; }
+.situacoes p { font-family: var(--display); font-weight: 600; font-size: 1.4375rem; line-height: 1.22; }
+
+/* Planos de análise */
+.planos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 40px clamp(20px, 2.6vw, 36px); }
+.plano { display: flex; flex-direction: column; gap: 14px; min-width: 0; border-top: 1px solid var(--linha); padding-top: 22px; }
+.plano .num { font-family: var(--display); font-weight: 500; font-size: 3.25rem; line-height: 0.9; color: var(--cobre); }
+.plano h3 { font-size: 1.5rem; color: var(--tinta); }
+.plano p { font-size: 0.97rem; color: var(--tinta-2); }
+.nota { max-width: 46rem; font-size: 1rem; color: var(--tinta-2); border-left: 2px solid var(--cobre); padding-left: 20px; }
+
+/* Condução e primeiro contato */
+.reunir { display: flex; flex-direction: column; min-width: 0; }
+.reunir div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 6px 24px; padding-block: 18px; border-top: 1px solid var(--linha); }
+.reunir div:last-child { border-bottom: 1px solid var(--linha); }
+.reunir dt { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobre-escuro); padding-top: 3px; }
+.reunir dd { font-size: 1rem; color: var(--tinta-2); }
+.prazo { font-family: var(--display); font-weight: 600; font-size: 1.375rem; line-height: 1.3; border-left: 2px solid var(--cobre); padding-left: 20px; max-width: 34em; }
+
+/* Perguntas frequentes */
+.perguntas { min-width: 0; }
+.perguntas details { border-top: 1px solid var(--linha); }
+.perguntas details:last-child { border-bottom: 1px solid var(--linha); }
+.perguntas summary {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 20px; cursor: pointer; list-style: none;
+  padding-block: 20px; font-family: var(--display); font-weight: 600; font-size: 1.375rem; line-height: 1.22;
+}
+.perguntas summary::-webkit-details-marker { display: none; }
+.perguntas summary::after { content: '+'; flex: none; font-family: var(--texto); font-weight: 300; font-size: 1.5rem; line-height: 1; color: var(--cobre-escuro); }
+.perguntas details[open] summary::after { content: '\2212'; }
+.perguntas details p { padding-bottom: 22px; color: var(--tinta-2); max-width: 40em; }
+
+/* Sobre */
+.sobre-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px clamp(40px, 6vw, 96px); align-items: start; }
+.sobre-texto { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.sobre-texto p:not(.rotulo) { color: var(--tinta-2); max-width: 36em; font-size: 1.125rem; }
+.ficha { min-width: 0; }
+.ficha div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 4px 20px; padding-block: 16px; border-top: 1px solid var(--linha); }
+.ficha div:last-child { border-bottom: 1px solid var(--linha); }
+.ficha dt { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobre-escuro); padding-top: 3px; }
+.ficha dd { font-size: 1rem; }
+
+/* Contato */
+.canais { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px clamp(28px, 4vw, 56px); }
+.canal { display: flex; flex-direction: column; gap: 10px; min-width: 0; border-top: 2px solid var(--cobre); padding-top: 22px; }
+.canal p { overflow-wrap: anywhere; }
+.canal .valor { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
+.canal a.fino { font-size: 0.9375rem; color: var(--cobre-escuro); text-underline-offset: 4px; align-self: flex-start; }
+.canal a.fino:hover { color: var(--tinta); }
+
+/* WhatsApp fixo no celular */
+.zap { display: none; }
+@media (max-width: 720px) {
+  .zap { display: inline-flex; align-items: center; gap: 8px; position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 20; background: var(--cobre); color: var(--marfim); text-decoration: none; padding: 12px 18px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(35, 35, 37, 0.28); }
+  .rodape .wrap { padding-bottom: 96px; }
+}
+
+/* Rodapé */
+.rodape { background: var(--grafite); color: var(--marfim-2); }
+.rodape .wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px 48px; padding-block: 44px; }
+.rodape img { width: 240px; }
+.rodape-texto { display: flex; flex-direction: column; gap: 6px; font-size: 0.875rem; font-weight: 300; min-width: 0; max-width: 34rem; }
+.rodape-texto strong { font-weight: 500; color: var(--marfim); }
+
+
+/* Chamada da abertura */
+.acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.botao {
+  display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+  background: var(--cobre); color: var(--marfim); padding: 14px 24px;
+  font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+.botao::after { content: '\2192'; letter-spacing: 0; }
+.botao:hover { background: var(--cobre-escuro); }
+
+/* Antes do vencimento */
+.alertas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px clamp(24px, 4vw, 56px); }
+.alerta { display: flex; flex-direction: column; gap: 12px; min-width: 0; border-top: 1px solid var(--linha-escura); padding-top: 22px; }
+.alerta h3 { font-size: 1.5rem; }
+.alerta p { font-size: 1rem; font-weight: 300; color: var(--marfim-3); }
+
+/* Perguntas por tema */
+.grupo-perguntas { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
+.grupo-perguntas .rotulo { margin-bottom: 6px; display: block; }
+
+/* Camadas: resumo visível, detalhe recolhível */
+.resumo { font-size: 1.1875rem; line-height: 1.5; color: var(--tinta) !important; }
+.mais summary {
+  display: inline-flex; align-items: center; gap: 10px; cursor: pointer; list-style: none;
+  font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobre-escuro);
+  padding-block: 6px; border-bottom: 1px solid var(--cobre);
+}
+.mais summary::-webkit-details-marker { display: none; }
+.mais summary::after { content: '+'; font-size: 1.125rem; letter-spacing: 0; line-height: 1; }
+.mais[open] summary::after { content: '\2212'; }
+.mais summary:hover { color: var(--tinta); }
+.mais-corpo { display: flex; flex-direction: column; gap: 16px; padding-top: 18px; }
+.situacoes li { padding: 0; }
+.situacoes a { display: flex; flex-direction: column; gap: 8px; padding-block: 22px; text-decoration: none; position: relative; padding-right: 32px; }
+.situacoes a::after { content: '\2192'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); color: var(--cobre-escuro); transition: transform 0.2s ease; }
+.situacoes a:hover p { color: var(--cobre-escuro); }
+.situacoes a:hover::after { transform: translate(4px, -50%); }
+@media (prefers-reduced-motion: reduce) { .situacoes a::after { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .filete { animation: none; } .indice a, .menu a { transition: none; } }
+
+@media (max-width: 1000px) {
+  .planos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .alertas { grid-template-columns: minmax(0, 1fr); }
+  .hero-grid, .sobre-grid, .duas { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .canais, .situacoes { grid-template-columns: minmax(0, 1fr); }
+  .cadeia { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 22px; }
+  .cadeia li:nth-child(4)::after { display: none; }
+}
+@media (max-width: 720px) {
+  .planos { grid-template-columns: minmax(0, 1fr); }
+  .plano { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: 16px; }
+  .plano .num { grid-row: span 2; font-size: 2.75rem; }
+  .cadeia { display: flex; flex-wrap: wrap; row-gap: 6px; }
+  .cadeia li { padding: 0; font-size: 0.9375rem; }
+  .cadeia li::before { display: none; }
+  .cadeia li::after, .cadeia li:nth-child(4)::after { content: '\2192'; position: static; display: inline; background: none; width: auto; height: auto; margin-inline: 8px; color: var(--cobre); }
+  .cadeia li:last-child::after { display: none; }
+  .reunir div, .ficha div { grid-template-columns: minmax(0, 1fr); }
+  /* Celular: menos respiro vertical e listas mais compactas */
+  .faixa { padding-block: 52px; }
+  .faixa > .wrap { gap: 28px; }
+  .cabeca { gap: 14px; }
+  .cabeca p:not(.rotulo) { font-size: 1.0625rem; }
+  .situacoes a { padding-block: 14px; gap: 4px; }
+  .situacoes p { font-size: 1.1875rem; }
+  .alertas { gap: 22px; }
+  .alerta { padding-top: 16px; gap: 8px; }
+  .alerta h3 { font-size: 1.3125rem; }
+  .frente { padding-block: 24px; }
+  .resumo { font-size: 1.0625rem; }
+  .planos { row-gap: 14px; }
+  .plano { padding-top: 14px; row-gap: 4px; }
+  .plano h3 { font-size: 1.3125rem; }
+  .plano .num { font-size: 2.25rem; }
+  .canais { gap: 26px; }
+  .canal { padding-top: 16px; gap: 6px; }
+  .canal .valor { font-size: 1.3125rem; }
+  .sobre-texto p:not(.rotulo) { font-size: 1.0625rem; }
+  .perguntas summary { font-size: 1.1875rem; padding-block: 16px; }
+}
+@media (max-width: 640px) {
+  :root { --barra: 56px; }
+  .marca { width: 62px; overflow: hidden; }
+  .marca img { width: 250px; max-width: none; }
+  .menu { gap: 6px 12px; }
+  .menu a { font-size: 0.72rem; letter-spacing: 0.12em; }
+}
+@media (max-width: 380px) { .menu .opcional { display: none; } }
+
+/* Perguntas frequentes em caixa recolhida */
+.caixa { background: var(--papel); border: 1px solid var(--linha); border-top: 2px solid var(--cobre); min-width: 0; }
+.caixa > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none;
+  padding: 22px 28px; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobre-escuro);
+}
+.caixa > summary::-webkit-details-marker { display: none; }
+.caixa > summary::after { content: '+'; font-size: 1.375rem; letter-spacing: 0; line-height: 1; margin-left: auto; }
+.caixa[open] > summary::after { content: '\2212'; }
+.caixa > summary:hover { color: var(--tinta); }
+.caixa > summary span { white-space: nowrap; }
+.caixa .conta { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--tinta-2); }
+.caixa > .perguntas { padding: 4px 28px 28px; }
+#metodo .mais { align-self: flex-start; max-width: 100%; }
+#metodo .mais[open] { align-self: stretch; }
+p.vias { display: block; }
+@media (max-width: 720px) {
+  .caixa > summary { padding: 18px 18px; }
+  .caixa > .perguntas { padding: 0 18px 18px; }
+}
+</style>
+
+<div class="barra">
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="Daniel Costa Germano Advocacia, início da página"><img src="{{LOGO_ESCURO}}" width="1025" height="160" alt="Daniel Costa Germano Advocacia"></a>
+    <nav aria-label="Seções da página">
+      <ul class="menu">
+        <li><a href="#atuacao">Atuação</a></li>
+        <li class="opcional"><a href="#metodo">Método</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li class="destaque"><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-texto">
+        <p class="rotulo">Advocacia · Londrina/PR</p>
+        <div class="filete" aria-hidden="true"></div>
+        <h1>Defesa de empresas e sócios</h1>
+        <p class="lead">Empresas, empresários, sócios, administradores e garantidores diante de execuções, constrições patrimoniais e responsabilização pessoal decorrentes da atividade empresarial.</p>
+        <div class="acoes">
+          <a class="botao" href="#contato">Contato</a>
+        </div>
+      </div>
+      <ul class="indice" aria-label="Frentes de atuação">
+        <li><a href="#bancario">Contencioso e execuções bancárias</a></li>
+        <li><a href="#fiscal">Execução fiscal e responsabilidade de sócios</a></li>
+        <li><a href="#patrimonial">Defesa patrimonial na execução</a></li>
+        <li><a href="#penal">Penal tributário e empresarial</a></li>
+      </ul>
+    </div>
+    <p class="assinatura">Daniel Costa Germano · Advogado · <b>OAB/PR 59.101</b></p>
+  </div>
+</header>
+
+<main>
+  <section class="faixa tom" id="situacoes">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Situações</p>
+        <h2>Quando o escritório costuma ser procurado</h2>
+      </div>
+      <ul class="situacoes">
+        <li><a href="#bancario"><span class="rotulo">Bancário</span><p>Execução ou monitória de banco contra a empresa, o sócio ou o avalista.</p></a></li>
+        <li><a href="#bancario"><span class="rotulo">Bancário</span><p>Cobrança de operação que a empresa não reconhece ou cujo saldo não confere.</p></a></li>
+        <li><a href="#patrimonial"><span class="rotulo">Patrimonial</span><p>Bloqueio de contas ou penhora de bens da empresa, dos sócios ou de terceiros.</p></a></li>
+        <li><a href="#fiscal"><span class="rotulo">Fiscal</span><p>Sócio ou ex-sócio incluído em execução fiscal da empresa.</p></a></li>
+        <li><a href="#fiscal"><span class="rotulo">Fiscal</span><p>Débito tributário relevante acumulado ou parcelamento perdido.</p></a></li>
+        <li><a href="#bancario"><span class="rotulo">Prescrição</span><p>Execução antiga, parada há anos, que voltou a tramitar.</p></a></li>
+        <li><a href="#penal"><span class="rotulo">Penal tributário</span><p>Autuação com multa qualificada, inquérito ou denúncia por crime tributário.</p></a></li>
+        <li><a href="#antes"><span class="rotulo">Antes do vencimento</span><p>Previsão de não conseguir pagar tributos ou bancos nos próximos meses.</p></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="faixa escura" id="antes">
+    <div class="wrap">
+      <div class="duas">
+        <div class="cabeca">
+          <p class="rotulo">Antes do vencimento</p>
+          <h2>Antes do inadimplemento, ainda há alternativas</h2>
+        </div>
+        <div class="texto">
+          <p>Quando a empresa já prevê que não conseguirá pagar tributos ou bancos, ainda há alternativas a avaliar, e parte delas deixa de existir depois da cobrança ou da autuação. As decisões desse período definem quem responderá pela dívida, com qual patrimônio e se haverá reflexos penais.</p>
+        </div>
+      </div>
+      <div class="alertas">
+        <div class="alerta">
+          <h3>Tributos</h3>
+          <p>Deixar de pagar não é o mesmo que deixar de declarar. Valores descontados de empregados ou cobrados de terceiros e não repassados ao fisco, porém, podem ter reflexos penais.</p>
+        </div>
+        <div class="alerta">
+          <h3>Bancos</h3>
+          <p>Renegociações e confissões de dívida costumam incorporar encargos, criar novo título executivo e exigir novas garantias de sócios e terceiros.</p>
+        </div>
+        <div class="alerta">
+          <h3>Patrimônio</h3>
+          <p>Transferências de bens posteriores à dívida podem ser declaradas ineficazes perante o credor. No débito tributário, a alienação após a inscrição em dívida ativa já se presume fraudulenta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" id="atuacao">
+    <div class="wrap">
+      <div class="duas">
+        <div class="cabeca">
+          <p class="rotulo">Atuação integrada</p>
+          <h2>Uma dívida empresarial raramente fica em uma só frente</h2>
+        </div>
+        <div class="texto">
+          <p>A cobrança contra a empresa pode alcançar sócios, administradores e garantidores, atingir bens particulares e, em matéria tributária, dar origem a investigação penal. Por isso, a análise considera o mesmo fato em todas as frentes em que ele produz efeitos.</p>
+        </div>
+      </div>
+
+      <ol class="cadeia" aria-label="O caminho de uma dívida empresarial">
+        <li>Empresa</li>
+        <li>Dívida</li>
+        <li>Título</li>
+        <li>Cobrança</li>
+        <li>Garantia</li>
+        <li>Sócio</li>
+        <li>Patrimônio pessoal</li>
+        <li>Reflexos penais</li>
+      </ol>
+
+      <div class="frentes">
+        <article class="frente duas" id="bancario">
+          <h3>Contencioso e execuções bancárias</h3>
+          <div class="texto">
+            <p class="resumo">Execuções, monitórias e cobranças de bancos contra a empresa e contra quem garantiu a operação, inclusive operações que a empresa contesta.</p>
+            <details class="mais">
+              <summary>Como é a atuação</summary>
+              <div class="mais-corpo">
+                <p>Cédula de crédito bancário, capital de giro, conta garantida, desconto de duplicatas, financiamento de máquinas e as garantias prestadas por sócios e terceiros. Em cada caso, examinam-se a força executiva do título, a evolução do saldo desde a liberação do crédito e a extensão de cada garantia.</p>
+                <p>Quando a contratação ou o saldo são controvertidos, a defesa pode exigir os documentos da operação e medidas para que o débito não produza efeitos patrimoniais antes de ser apurado. Em execuções antigas, a prescrição intercorrente recebe exame próprio.</p>
+                <p>Conforme o caso, a defesa se dá por exceção de pré-executividade, embargos, impugnação de penhoras e bloqueios e recursos.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="frente duas" id="fiscal">
+          <h3>Execução fiscal e responsabilidade de sócios</h3>
+          <div class="texto">
+            <p class="resumo">Defesa da empresa e do sócio quando a execução fiscal avança sobre o patrimônio pessoal.</p>
+            <details class="mais">
+              <summary>Como é a atuação</summary>
+              <div class="mais-corpo">
+                <p>Redirecionamento da execução contra sócios, ex-sócios e administradores, pedidos de desconsideração da personalidade jurídica e prescrição, inclusive a intercorrente.</p>
+                <p>Examinam-se a certidão de dívida ativa, o período de vínculo de cada pessoa com a empresa, o fundamento invocado para responsabilizá-la (dissolução irregular, infração de lei ou do contrato social), quem administrava à época e se o crédito ainda pode ser exigido.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="frente duas" id="patrimonial">
+          <h3>Defesa patrimonial na execução</h3>
+          <div class="texto">
+            <p class="resumo">Bloqueios de contas, penhoras de imóveis, quotas e faturamento e defesa de quem teve bens atingidos por dívida alheia.</p>
+            <details class="mais">
+              <summary>Como é a atuação</summary>
+              <div class="mais-corpo">
+                <p>Bloqueios pelo SISBAJUD, penhoras de imóveis, veículos, quotas sociais e faturamento e defesa de terceiros alcançados por dívida alheia.</p>
+                <p>O exame considera a impenhorabilidade, o excesso, a ordem legal e a menor onerosidade de cada constrição, o percentual da penhora de faturamento e se a pessoa atingida deveria, de fato, responder pela dívida.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="frente duas" id="penal">
+          <h3>Penal tributário e empresarial</h3>
+          <div class="texto">
+            <p class="resumo">Defesa de sócios e administradores em investigações e ações penais por crimes tributários, com foco na conduta de cada um.</p>
+            <details class="mais">
+              <summary>Como é a atuação</summary>
+              <div class="mais-corpo">
+                <p>Nos crimes contra a ordem tributária (Lei 8.137/90), o trabalho começa pelo processo administrativo fiscal que deu origem à acusação e acompanha o caso do inquérito ao julgamento.</p>
+                <p>Ser sócio ou administrador não encerra a análise. A defesa reconstrói quem efetivamente administrava, quem praticou os atos investigados e quem decidia, a partir de documentos societários, procurações, registros contábeis e fiscais e declarações transmitidas.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <p class="vias">O escritório também atua em contratos e litígios empresariais relacionados a essas frentes.</p>
+    </div>
+  </section>
+
+  <section class="faixa tom" id="metodo">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Método e condução</p>
+        <h2>Cinco planos de análise</h2>
+        <p>Os casos são conduzidos pessoalmente por Daniel Costa Germano. A análise parte do processo existente, e não de uma tese escolhida de antemão: cada argumento tem lugar e momento, o que alegar, quando e em qual peça.</p>
+      </div>
+      <ol class="planos">
+        <li class="plano">
+          <span class="num" aria-hidden="true">I</span>
+          <h3>Processo e legitimidade</h3>
+          <p>Citação, intimações e legitimidade das partes. Um vício aqui pode comprometer os atos seguintes, inclusive a penhora.</p>
+        </li>
+        <li class="plano">
+          <span class="num" aria-hidden="true">II</span>
+          <h3>Título e origem da obrigação</h3>
+          <p>De onde vem a dívida e se o título que sustenta a cobrança é válido.</p>
+        </li>
+        <li class="plano">
+          <span class="num" aria-hidden="true">III</span>
+          <h3>Responsabilidade e garantias</h3>
+          <p>Se aquela pessoa deve responder, em que extensão e com qual fundamento.</p>
+        </li>
+        <li class="plano">
+          <span class="num" aria-hidden="true">IV</span>
+          <h3>Prescrição</h3>
+          <p>O prazo para cobrar e a prescrição intercorrente.</p>
+        </li>
+        <li class="plano">
+          <span class="num" aria-hidden="true">V</span>
+          <h3>Valor e exigibilidade</h3>
+          <p>Encargos, excesso de execução e se a dívida pode ser exigida naquele momento.</p>
+        </li>
+      </ol>
+      <p class="nota">A ordem de exame depende do caso: uma prescrição evidente ou um bloqueio urgente podem exigir atuação imediata. Os planos organizam a análise; não antecipam o resultado.</p>
+      <details class="mais" id="reunir">
+        <summary>O que reunir para a análise inicial</summary>
+        <div class="mais-corpo">
+          <dl class="reunir">
+            <div><dt>Execução bancária</dt><dd>Contrato, aditivos, demonstrativos do débito e documentos das garantias.</dd></div>
+            <div><dt>Execução fiscal</dt><dd>Certidão de dívida ativa, processo de execução e, quando necessário, o processo administrativo que originou o crédito.</dd></div>
+            <div><dt>Penal</dt><dd>Processo administrativo fiscal, inquérito ou denúncia e os documentos societários da época dos fatos.</dd></div>
+          </dl>
+          <p class="prazo">Em processos em andamento, a data da citação, da intimação ou da ciência do ato permite verificar desde logo os prazos em curso.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="faixa" id="perguntas">
+    <div class="wrap">
+      <div class="duas">
+        <div class="cabeca">
+          <p class="rotulo">Informação</p>
+          <h2>Perguntas frequentes</h2>
+          <p>Respostas gerais, de caráter informativo. Cada processo só pode ser avaliado com os documentos.</p>
+        </div>
+        <details class="caixa">
+          <summary><span>Ver as perguntas</span><span class="conta" data-conta></span></summary>
+          <div class="perguntas grupo-perguntas">
+          <div>
+            <span class="rotulo">Antes do vencimento</span>
+            <details>
+              <summary>A empresa não vai conseguir pagar tributos e bancos. Ainda há o que avaliar antes do vencimento?</summary>
+              <p>Sim. Antes do inadimplemento, ainda é possível avaliar as alternativas de negociação, as garantias prestadas pelos sócios e os reflexos penais de cada escolha. Declarar corretamente o débito é indispensável, mas não afasta, por si, todos os reflexos penais.</p>
+            </details>
+            <details>
+              <summary>Devo assinar a renegociação ou a confissão de dívida proposta pelo banco?</summary>
+              <p>Pode ser uma solução, mas o documento costuma incorporar encargos ao saldo, criar um novo título executivo e pedir garantias adicionais de sócios, cônjuges ou outras empresas. Antes de assinar, é preciso saber o que se está reconhecendo e quem passa a responder.</p>
+            </details>
+          </div>
+          <div>
+            <span class="rotulo">Tributos e matéria penal</span>
+            <details>
+              <summary>Deixar de pagar imposto é crime?</summary>
+              <p>Em regra, não. A lei penal pune condutas específicas, como a fraude e a omissão de informações para reduzir ou suprimir tributo. Há, porém, situações sensíveis: valores descontados de empregados ou cobrados de terceiros e não repassados ao fisco, e o não recolhimento contumaz, com dolo de apropriação, do ICMS cobrado do adquirente, que o STF reconheceu como crime.</p>
+            </details>
+            <details>
+              <summary>Pagar ou parcelar o tributo encerra o processo penal?</summary>
+              <p>O pagamento e o parcelamento podem produzir efeitos sobre a investigação ou a ação penal, mas esses efeitos dependem do momento, do tipo de crime e da situação do contribuinte perante o fisco: desde a Lei Complementar 225/2026, o devedor declarado contumaz em decisão administrativa definitiva não se beneficia dessas regras. A decisão deve considerar, em conjunto, a situação fiscal e a penal.</p>
+            </details>
+            <details>
+              <summary>Fui intimado a depor sobre a empresa. Como devo proceder?</summary>
+              <p>Antes de comparecer, é importante saber em que condição a pessoa é chamada, como testemunha ou como investigada, e conhecer o procedimento a que a intimação se refere. O investigado pode ser acompanhado por advogado e tem o direito de permanecer em silêncio. Mesmo como testemunha, ninguém é obrigado a responder perguntas que possam incriminá-lo.</p>
+            </details>
+            <details>
+              <summary>Sou sócio, mas não administrava a empresa. Posso responder criminalmente?</summary>
+              <p>A responsabilidade penal é pessoal. A condição de sócio, por si só, não basta: é preciso demonstrar a participação de cada pessoa nos fatos. Por isso, a defesa examina quem efetivamente administrava, quem decidia e quem praticou os atos investigados.</p>
+            </details>
+          </div>
+          <div>
+            <span class="rotulo">Execuções e patrimônio</span>
+            <details>
+              <summary>Fui citado em uma execução. O que fazer primeiro?</summary>
+              <p>Os prazos de defesa são curtos e variam conforme o tipo de processo, e a data da citação define o tempo disponível. Por isso, a análise do processo e dos documentos da operação deve começar logo.</p>
+            </details>
+            <details>
+              <summary>O sócio responde com o patrimônio pessoal pelas dívidas da empresa?</summary>
+              <p>Em regra, não. O patrimônio da empresa é distinto do patrimônio dos sócios. A responsabilização pessoal depende de hipóteses previstas em lei e deve ser examinada caso a caso. Situação diferente é a de quem assinou como avalista ou fiador, que responde pela garantia que prestou.</p>
+            </details>
+            <details>
+              <summary>Saí da sociedade. Ainda posso responder por dívidas da empresa?</summary>
+              <p>Depende da natureza da dívida, da data em que ela surgiu, da data e da forma da saída e do fundamento usado para a cobrança. A situação do ex-sócio exige exame próprio, porque as regras civis e tributárias não são as mesmas.</p>
+            </details>
+            <details>
+              <summary>Assinei como avalista. Respondo pela dívida toda?</summary>
+              <p>Em regra, sim. O avalista responde de forma autônoma e solidária, e o credor pode cobrá-lo diretamente, sem antes executar a empresa. A validade e a extensão do aval, a regularidade do título e a composição do saldo, porém, podem ser discutidas.</p>
+            </details>
+            <details>
+              <summary>A conta da empresa ou do sócio foi bloqueada. É possível liberar?</summary>
+              <p>Depende da origem do valor e da regularidade da ordem. A lei protege certos valores, em hipóteses e limites definidos, e o bloqueio também pode ser questionado quando excede o valor cobrado ou alcança quem não deveria responder. Os prazos para impugnar o bloqueio são curtos.</p>
+            </details>
+            <details>
+              <summary>Uma execução pode prescrever depois de ajuizada?</summary>
+              <p>Pode. É a prescrição intercorrente: frustrada a localização do devedor ou de bens penhoráveis, o prazo passa a correr e só se interrompe com citação, intimação ou constrição efetivas. As regras não são as mesmas na execução civil e na fiscal, e a contagem exige o exame do andamento do processo.</p>
+            </details>
+          </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa tom" id="sobre">
+    <div class="wrap">
+      <div class="sobre-grid">
+        <div class="sobre-texto">
+          <p class="rotulo">Sobre</p>
+          <h2>Daniel Costa Germano</h2>
+          <p>Advogado em Londrina/PR, inscrito na OAB/PR sob o nº 59.101, titular da Daniel Costa Germano Sociedade Individual de Advocacia.</p>
+          <p>Conduz pessoalmente os casos do escritório, concentrados na defesa de empresas, sócios, administradores e garantidores em execuções bancárias e fiscais, na defesa patrimonial e em matéria penal tributária.</p>
+        </div>
+        <dl class="ficha">
+          <div><dt>Inscrição</dt><dd>OAB/PR 59.101</dd></div>
+          <div><dt>Advocacia</dt><dd>Desde 2011</dd></div>
+          <div><dt>Graduação</dt><dd>Direito, Faculdade Pitágoras de Londrina, 2010</dd></div>
+          <div><dt>Pós-graduação</dt><dd>Direito Tributário, Instituto Brasileiro de Estudos Tributários (IBET)</dd></div>
+          <div><dt>Atendimento</dt><dd>Empresas, empresários, sócios, administradores, avalistas e fiadores</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" id="contato">
+    <div class="wrap">
+      <div class="cabeca">
+        <p class="rotulo">Contato</p>
+        <h2>Onde encontrar o escritório</h2>
+      </div>
+      <div class="canais">
+        <div class="canal">
+          <p class="rotulo">Telefone e WhatsApp</p>
+          <p class="valor">(43) 99182-9593</p>
+          <a class="fino" href="https://wa.me/5543991829593" target="_blank" rel="noopener">Abrir no WhatsApp</a>
+        </div>
+        <div class="canal">
+          <p class="rotulo">Endereço</p>
+          <p class="valor">Av. Higienópolis, 32, Sala 801</p>
+          <p>Centro, Londrina/PR<br> CEP 86020-080</p>
+          <a class="fino" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Higien%C3%B3polis%2C+32%2C+Sala+801%2C+Londrina+-+PR" target="_blank" rel="noopener">Ver no mapa</a>
+        </div>
+        <div class="canal">
+          <p class="rotulo">E-mail</p>
+          <p class="valor">contato@<wbr>danielcostagermano<wbr>.adv.br</p>
+          <a class="fino" href="mailto:contato@danielcostagermano.adv.br">Escrever um e-mail</a>
+        </div>
+        <div class="canal">
+          <p class="rotulo">LinkedIn</p>
+          <p class="valor">Daniel Costa Germano</p>
+          <a class="fino" href="https://www.linkedin.com/in/daniel-costa-germano-81b609210/" target="_blank" rel="noopener">Abrir o perfil</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <img src="{{LOGO_ESCURO}}" width="1025" height="160" alt="Daniel Costa Germano Advocacia">
+    <div class="rodape-texto">
+      <p><strong>Daniel Costa Germano Sociedade Individual de Advocacia</strong></p>
+      <p>CNPJ 42.229.009/0001-19 · Londrina/PR</p>
+      <p>Conteúdo informativo. Não substitui a análise do caso concreto.</p>
+    </div>
+  </div>
+</footer>
+
+<a class="zap" href="https://wa.me/5543991829593" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp">WhatsApp</a>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.menu a'));
+  if (!('IntersectionObserver' in window) || !links.length) return;
+  var secao = { inicio: null, situacoes: 'atuacao', antes: 'atuacao', atuacao: 'atuacao', metodo: 'metodo', perguntas: 'metodo', sobre: 'sobre', contato: 'contato' };
+  var mapa = {};
+  links.forEach(function (a) { mapa[a.getAttribute('href').slice(1)] = a; });
+  var obs = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.removeAttribute('aria-current'); });
+      var alvo = mapa[secao[e.target.id]];
+      if (alvo) alvo.setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  Object.keys(secao).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+</script>
+<script>
+document.addEventListener('click', function (ev) {
+  var a = ev.target.closest && ev.target.closest('.situacoes a, .indice a');
+  if (!a) return;
+  var alvo = document.querySelector(a.getAttribute('href'));
+  var det = alvo && alvo.querySelector('details.mais');
+  if (det) det.open = true;
+});
+</script>
+<script>
+(function () {
+  var caixa = document.querySelector('.caixa');
+  if (!caixa) return;
+  var n = caixa.querySelectorAll('.perguntas details').length;
+  var c = caixa.querySelector('[data-conta]');
+  if (c) c.textContent = n + ' perguntas';
+  if (location.hash === '#perguntas') caixa.open = true;
+})();
+</script>
