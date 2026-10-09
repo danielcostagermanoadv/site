@@ -14,7 +14,7 @@
 <meta property="og:description" content="Escritório de advocacia em Londrina/PR. Defesa de empresas, sócios, administradores e garantidores em execuções bancárias e fiscais, constrições patrimoniais, responsabilidade pessoal e matéria penal tributária e empresarial. OAB/PR 59.101.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
-<meta property="og:image" content="https://danielcostagermano.adv.br/compartilhar.jpg">
+<meta property="og:image" content="https://danielcostagermano.adv.br/compartilhar.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -282,20 +282,63 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
   .planos { grid-template-columns: minmax(0, 1fr); }
   .plano { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: 16px; }
   .plano .num { grid-row: span 2; font-size: 2.75rem; }
-  .cadeia { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
-  .cadeia li { padding: 0 0 18px 30px; }
-  .cadeia li::before { top: 6px; }
-  .cadeia li::after, .cadeia li:nth-child(4)::after { display: block; top: 17px; left: 5px; right: auto; bottom: -6px; width: 1px; height: auto; }
+  .cadeia { display: flex; flex-wrap: wrap; row-gap: 6px; }
+  .cadeia li { padding: 0; font-size: 0.9375rem; }
+  .cadeia li::before { display: none; }
+  .cadeia li::after, .cadeia li:nth-child(4)::after { content: '\2192'; position: static; display: inline; background: none; width: auto; height: auto; margin-inline: 8px; color: var(--cobre); }
   .cadeia li:last-child::after { display: none; }
   .reunir div, .ficha div { grid-template-columns: minmax(0, 1fr); }
+  /* Celular: menos respiro vertical e listas mais compactas */
+  .faixa { padding-block: 52px; }
+  .faixa > .wrap { gap: 28px; }
+  .cabeca { gap: 14px; }
+  .cabeca p:not(.rotulo) { font-size: 1.0625rem; }
+  .situacoes a { padding-block: 14px; gap: 4px; }
+  .situacoes p { font-size: 1.1875rem; }
+  .alertas { gap: 22px; }
+  .alerta { padding-top: 16px; gap: 8px; }
+  .alerta h3 { font-size: 1.3125rem; }
+  .frente { padding-block: 24px; }
+  .resumo { font-size: 1.0625rem; }
+  .planos { row-gap: 14px; }
+  .plano { padding-top: 14px; row-gap: 4px; }
+  .plano h3 { font-size: 1.3125rem; }
+  .plano .num { font-size: 2.25rem; }
+  .canais { gap: 26px; }
+  .canal { padding-top: 16px; gap: 6px; }
+  .canal .valor { font-size: 1.3125rem; }
+  .sobre-texto p:not(.rotulo) { font-size: 1.0625rem; }
+  .perguntas summary { font-size: 1.1875rem; padding-block: 16px; }
 }
 @media (max-width: 640px) {
   :root { --barra: 56px; }
   .marca { width: 62px; overflow: hidden; }
   .marca img { width: 250px; max-width: none; }
-  .menu a { font-size: 0.72rem; letter-spacing: 0.14em; }
+  .menu { gap: 6px 12px; }
+  .menu a { font-size: 0.72rem; letter-spacing: 0.12em; }
 }
 @media (max-width: 380px) { .menu .opcional { display: none; } }
+
+/* Perguntas frequentes em caixa recolhida */
+.caixa { background: var(--papel); border: 1px solid var(--linha); border-top: 2px solid var(--cobre); min-width: 0; }
+.caixa > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none;
+  padding: 22px 28px; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cobre-escuro);
+}
+.caixa > summary::-webkit-details-marker { display: none; }
+.caixa > summary::after { content: '+'; font-size: 1.375rem; letter-spacing: 0; line-height: 1; margin-left: auto; }
+.caixa[open] > summary::after { content: '\2212'; }
+.caixa > summary:hover { color: var(--tinta); }
+.caixa > summary span { white-space: nowrap; }
+.caixa .conta { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--tinta-2); }
+.caixa > .perguntas { padding: 4px 28px 28px; }
+#metodo .mais { align-self: flex-start; max-width: 100%; }
+#metodo .mais[open] { align-self: stretch; }
+p.vias { display: block; }
+@media (max-width: 720px) {
+  .caixa > summary { padding: 18px 18px; }
+  .caixa > .perguntas { padding: 0 18px 18px; }
+}
 </style>
 </head>
 <body>
@@ -343,19 +386,16 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
       <div class="cabeca">
         <p class="rotulo">Situações</p>
         <h2>Quando o escritório costuma ser procurado</h2>
-        <p>Em regra, o cliente chega com o processo ou a autuação já em curso.</p>
       </div>
       <ul class="situacoes">
-        <li><a href="#bancario"><span class="rotulo">Bancário</span><p>A empresa, o sócio ou o avalista foi citado em execução ou ação monitória de banco.</p></a></li>
-        <li><a href="#bancario"><span class="rotulo">Bancário</span><p>O banco cobra uma operação que a empresa não reconhece ou cujo saldo não confere.</p></a></li>
-        <li><a href="#patrimonial"><span class="rotulo">Patrimonial</span><p>Houve bloqueio de valores em conta ou penhora de bens da empresa ou dos sócios.</p></a></li>
-        <li><a href="#patrimonial"><span class="rotulo">Patrimonial</span><p>Um bem de quem não é devedor foi penhorado por dívida da empresa.</p></a></li>
-        <li><a href="#fiscal"><span class="rotulo">Fiscal</span><p>O sócio ou ex-sócio foi incluído em execução fiscal da empresa.</p></a></li>
-        <li><a href="#bancario"><span class="rotulo">Prescrição</span><p>Uma execução antiga, parada há anos, voltou a tramitar.</p></a></li>
-        <li><a href="#penal"><span class="rotulo">Penal tributário</span><p>A empresa foi autuada com multa qualificada ou com indicação de representação fiscal para fins penais.</p></a></li>
-        <li><a href="#penal"><span class="rotulo">Penal tributário</span><p>O sócio ou administrador foi intimado em inquérito ou denunciado por crime tributário.</p></a></li>
-              <li><a href="#fiscal"><span class="rotulo">Fiscal</span><p>A empresa acumulou débito tributário relevante ou perdeu um parcelamento.</p></a></li>
-        <li><a href="#antes"><span class="rotulo">Antes do vencimento</span><p>A empresa prevê que não conseguirá pagar tributos ou bancos nos próximos meses.</p></a></li>
+        <li><a href="#bancario"><span class="rotulo">Bancário</span><p>Execução ou monitória de banco contra a empresa, o sócio ou o avalista.</p></a></li>
+        <li><a href="#bancario"><span class="rotulo">Bancário</span><p>Cobrança de operação que a empresa não reconhece ou cujo saldo não confere.</p></a></li>
+        <li><a href="#patrimonial"><span class="rotulo">Patrimonial</span><p>Bloqueio de contas ou penhora de bens da empresa, dos sócios ou de terceiros.</p></a></li>
+        <li><a href="#fiscal"><span class="rotulo">Fiscal</span><p>Sócio ou ex-sócio incluído em execução fiscal da empresa.</p></a></li>
+        <li><a href="#fiscal"><span class="rotulo">Fiscal</span><p>Débito tributário relevante acumulado ou parcelamento perdido.</p></a></li>
+        <li><a href="#bancario"><span class="rotulo">Prescrição</span><p>Execução antiga, parada há anos, que voltou a tramitar.</p></a></li>
+        <li><a href="#penal"><span class="rotulo">Penal tributário</span><p>Autuação com multa qualificada, inquérito ou denúncia por crime tributário.</p></a></li>
+        <li><a href="#antes"><span class="rotulo">Antes do vencimento</span><p>Previsão de não conseguir pagar tributos ou bancos nos próximos meses.</p></a></li>
       </ul>
     </div>
   </section>
@@ -368,22 +408,21 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
           <h2>Antes do inadimplemento, ainda há alternativas</h2>
         </div>
         <div class="texto">
-          <p>Quando a empresa já prevê que não conseguirá pagar tributos ou cumprir contratos bancários, ainda há alternativas a avaliar. Parte delas deixa de existir depois do ajuizamento da cobrança ou da autuação.</p>
-          <p>As decisões tomadas nesse período podem definir quem responderá pela dívida, com qual patrimônio e se haverá reflexos penais.</p>
+          <p>Quando a empresa já prevê que não conseguirá pagar tributos ou bancos, ainda há alternativas a avaliar, e parte delas deixa de existir depois da cobrança ou da autuação. As decisões desse período definem quem responderá pela dívida, com qual patrimônio e se haverá reflexos penais.</p>
         </div>
       </div>
       <div class="alertas">
         <div class="alerta">
           <h3>Tributos</h3>
-          <p>Deixar de pagar não é o mesmo que deixar de declarar. Ainda assim, valores descontados de empregados ou cobrados de terceiros e não repassados ao fisco podem ter reflexos penais.</p>
+          <p>Deixar de pagar não é o mesmo que deixar de declarar. Valores descontados de empregados ou cobrados de terceiros e não repassados ao fisco, porém, podem ter reflexos penais.</p>
         </div>
         <div class="alerta">
           <h3>Bancos</h3>
-          <p>Renegociações e confissões de dívida costumam incorporar encargos ao saldo, criar novo título executivo e exigir novas garantias de sócios e terceiros.</p>
+          <p>Renegociações e confissões de dívida costumam incorporar encargos, criar novo título executivo e exigir novas garantias de sócios e terceiros.</p>
         </div>
         <div class="alerta">
           <h3>Patrimônio</h3>
-          <p>Transferências de bens feitas depois do surgimento da dívida podem ser anuladas ou declaradas ineficazes perante o credor. No débito tributário, a alienação posterior à inscrição em dívida ativa já se presume fraudulenta.</p>
+          <p>Transferências de bens posteriores à dívida podem ser declaradas ineficazes perante o credor. No débito tributário, a alienação após a inscrição em dívida ativa já se presume fraudulenta.</p>
         </div>
       </div>
     </div>
@@ -397,8 +436,7 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
           <h2>Uma dívida empresarial raramente fica em uma só frente</h2>
         </div>
         <div class="texto">
-          <p>Uma cobrança dirigida contra a empresa pode alcançar sócios, administradores, avalistas e fiadores, resultar em bloqueio de contas e penhora de bens particulares e, em matéria tributária, dar origem a investigação ou ação penal.</p>
-          <p>Por isso, a análise não se limita ao processo que chegou primeiro: considera a origem da obrigação, a responsabilidade de cada pessoa e os efeitos do mesmo fato em outros processos.</p>
+          <p>A cobrança contra a empresa pode alcançar sócios, administradores e garantidores, atingir bens particulares e, em matéria tributária, dar origem a investigação penal. Por isso, a análise considera o mesmo fato em todas as frentes em que ele produz efeitos.</p>
         </div>
       </div>
 
@@ -421,9 +459,9 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
             <details class="mais">
               <summary>Como é a atuação</summary>
               <div class="mais-corpo">
-            <p>A atuação alcança os contratos mais comuns do crédito empresarial, como cédula de crédito bancário, capital de giro, conta garantida, desconto de duplicatas e financiamento de máquinas e equipamentos, e as garantias prestadas por sócios e terceiros. Em cada caso, examinam-se a força executiva do título, a evolução do saldo desde a liberação do crédito e a extensão de cada garantia.</p>
-            <p>Abrange também controvérsias anteriores ou paralelas à execução: a contratação, a origem do débito e a composição do saldo. Nesses casos, a defesa pode exigir a obtenção dos documentos da operação e medidas para impedir que uma obrigação controvertida produza efeitos patrimoniais antes de ser apurada.</p>
-            <p>Em execuções antigas, a prescrição intercorrente recebe exame próprio: o termo inicial, os períodos de suspensão e arquivamento e os atos efetivamente praticados.</p>
+                <p>Cédula de crédito bancário, capital de giro, conta garantida, desconto de duplicatas, financiamento de máquinas e as garantias prestadas por sócios e terceiros. Em cada caso, examinam-se a força executiva do título, a evolução do saldo desde a liberação do crédito e a extensão de cada garantia.</p>
+                <p>Quando a contratação ou o saldo são controvertidos, a defesa pode exigir os documentos da operação e medidas para que o débito não produza efeitos patrimoniais antes de ser apurado. Em execuções antigas, a prescrição intercorrente recebe exame próprio.</p>
+                <p>Conforme o caso, a defesa se dá por exceção de pré-executividade, embargos, impugnação de penhoras e bloqueios e recursos.</p>
               </div>
             </details>
           </div>
@@ -435,8 +473,8 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
             <details class="mais">
               <summary>Como é a atuação</summary>
               <div class="mais-corpo">
-            <p>A atuação abrange o redirecionamento da execução fiscal contra sócios, ex-sócios e administradores, os pedidos de desconsideração da personalidade jurídica e a verificação da prescrição, inclusive a intercorrente.</p>
-            <p>Em cada caso, examina-se a regularidade da certidão de dívida ativa, o período em que cada pessoa esteve vinculada à empresa, o fundamento invocado para responsabilizá-la (dissolução irregular, infração de lei ou do contrato social), quem administrava a empresa à época e se o crédito ainda pode ser exigido.</p>
+                <p>Redirecionamento da execução contra sócios, ex-sócios e administradores, pedidos de desconsideração da personalidade jurídica e prescrição, inclusive a intercorrente.</p>
+                <p>Examinam-se a certidão de dívida ativa, o período de vínculo de cada pessoa com a empresa, o fundamento invocado para responsabilizá-la (dissolução irregular, infração de lei ou do contrato social), quem administrava à época e se o crédito ainda pode ser exigido.</p>
               </div>
             </details>
           </div>
@@ -448,8 +486,8 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
             <details class="mais">
               <summary>Como é a atuação</summary>
               <div class="mais-corpo">
-            <p>Boa parte dos problemas surge quando a cobrança passa a atingir bens. A atuação compreende bloqueios de contas e aplicações pelo SISBAJUD, penhoras de imóveis, veículos, quotas sociais e faturamento e a defesa de terceiros cujos bens foram alcançados por dívida alheia.</p>
-            <p>O exame considera a impenhorabilidade, o excesso, a ordem legal e a menor onerosidade de cada constrição, o percentual da penhora de faturamento e se a pessoa atingida deveria, de fato, responder pela dívida.</p>
+                <p>Bloqueios pelo SISBAJUD, penhoras de imóveis, veículos, quotas sociais e faturamento e defesa de terceiros alcançados por dívida alheia.</p>
+                <p>O exame considera a impenhorabilidade, o excesso, a ordem legal e a menor onerosidade de cada constrição, o percentual da penhora de faturamento e se a pessoa atingida deveria, de fato, responder pela dívida.</p>
               </div>
             </details>
           </div>
@@ -461,99 +499,78 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
             <details class="mais">
               <summary>Como é a atuação</summary>
               <div class="mais-corpo">
-            <p>Nos crimes contra a ordem tributária (Lei 8.137/90), o trabalho começa pelo processo administrativo fiscal que deu origem à acusação e acompanha o caso do inquérito ao julgamento.</p>
-            <p>A condição formal de sócio ou administrador não encerra a análise da responsabilidade. A defesa reconstrói quem efetivamente administrava a empresa, quem praticou os atos investigados e quem tinha poder de decisão, a partir de documentos societários, procurações, registros contábeis e fiscais, assinaturas, acessos e declarações transmitidas.</p>
+                <p>Nos crimes contra a ordem tributária (Lei 8.137/90), o trabalho começa pelo processo administrativo fiscal que deu origem à acusação e acompanha o caso do inquérito ao julgamento.</p>
+                <p>Ser sócio ou administrador não encerra a análise. A defesa reconstrói quem efetivamente administrava, quem praticou os atos investigados e quem decidia, a partir de documentos societários, procurações, registros contábeis e fiscais e declarações transmitidas.</p>
               </div>
             </details>
           </div>
         </article>
       </div>
 
-      <div class="vias">
-        <p>Nas execuções bancárias e fiscais, conforme o caso, a defesa pode se dar no próprio processo, por exceção de pré-executividade, embargos, impugnação de penhoras e bloqueios e recursos contra decisões que ampliem indevidamente a responsabilidade patrimonial.</p>
-        <p>Além dessas frentes, o escritório atua em contratos e litígios empresariais relacionados a elas.</p>
-      </div>
+      <p class="vias">O escritório também atua em contratos e litígios empresariais relacionados a essas frentes.</p>
     </div>
   </section>
-
-
 
   <section class="faixa tom" id="metodo">
     <div class="wrap">
       <div class="cabeca">
-        <p class="rotulo">Método</p>
+        <p class="rotulo">Método e condução</p>
         <h2>Cinco planos de análise</h2>
-        <p>A análise de cada caso é estruturada em cinco planos. A ordem de exame depende do caso: uma prescrição evidente ou um bloqueio urgente podem exigir atuação imediata.</p>
+        <p>Os casos são conduzidos pessoalmente por Daniel Costa Germano. A análise parte do processo existente, e não de uma tese escolhida de antemão: cada argumento tem lugar e momento, o que alegar, quando e em qual peça.</p>
       </div>
       <ol class="planos">
         <li class="plano">
           <span class="num" aria-hidden="true">I</span>
           <h3>Processo e legitimidade</h3>
-          <p>Citação, intimações e legitimidade de quem cobra e de quem é cobrado. Um vício nessa base pode comprometer os atos seguintes, inclusive a penhora.</p>
+          <p>Citação, intimações e legitimidade das partes. Um vício aqui pode comprometer os atos seguintes, inclusive a penhora.</p>
         </li>
         <li class="plano">
           <span class="num" aria-hidden="true">II</span>
           <h3>Título e origem da obrigação</h3>
-          <p>De onde vem a dívida, se o título que sustenta a cobrança é válido e se os documentos que o acompanham são regulares.</p>
+          <p>De onde vem a dívida e se o título que sustenta a cobrança é válido.</p>
         </li>
         <li class="plano">
           <span class="num" aria-hidden="true">III</span>
           <h3>Responsabilidade e garantias</h3>
-          <p>Se aquela pessoa deveria responder pela obrigação, em que extensão e com base em qual garantia ou fundamento legal.</p>
+          <p>Se aquela pessoa deve responder, em que extensão e com qual fundamento.</p>
         </li>
         <li class="plano">
           <span class="num" aria-hidden="true">IV</span>
           <h3>Prescrição</h3>
-          <p>O prazo para cobrar e a prescrição intercorrente, com o exame dos períodos de paralisação e dos atos do credor.</p>
+          <p>O prazo para cobrar e a prescrição intercorrente.</p>
         </li>
         <li class="plano">
           <span class="num" aria-hidden="true">V</span>
           <h3>Valor e exigibilidade</h3>
-          <p>Valores, encargos, índices, excesso de execução e se a dívida pode ser exigida naquele momento.</p>
+          <p>Encargos, excesso de execução e se a dívida pode ser exigida naquele momento.</p>
         </li>
       </ol>
-      <p class="nota">Cada caso depende dos seus próprios fatos e documentos. Os planos organizam a análise; não antecipam o resultado.</p>
+      <p class="nota">A ordem de exame depende do caso: uma prescrição evidente ou um bloqueio urgente podem exigir atuação imediata. Os planos organizam a análise; não antecipam o resultado.</p>
+      <details class="mais" id="reunir">
+        <summary>O que reunir para a análise inicial</summary>
+        <div class="mais-corpo">
+          <dl class="reunir">
+            <div><dt>Execução bancária</dt><dd>Contrato, aditivos, demonstrativos do débito e documentos das garantias.</dd></div>
+            <div><dt>Execução fiscal</dt><dd>Certidão de dívida ativa, processo de execução e, quando necessário, o processo administrativo que originou o crédito.</dd></div>
+            <div><dt>Penal</dt><dd>Processo administrativo fiscal, inquérito ou denúncia e os documentos societários da época dos fatos.</dd></div>
+          </dl>
+          <p class="prazo">Em processos em andamento, a data da citação, da intimação ou da ciência do ato permite verificar desde logo os prazos em curso.</p>
+        </div>
+      </details>
     </div>
   </section>
 
-  <section class="faixa" id="conducao">
-    <div class="wrap">
-      <div class="duas">
-        <div class="cabeca">
-          <p class="rotulo">Condução do caso</p>
-          <h2>Do processo para a estratégia</h2>
-        </div>
-        <div class="texto">
-          <p>Os casos são conduzidos pessoalmente por Daniel Costa Germano, da análise inicial dos documentos e do processo à definição da estratégia e à elaboração das manifestações.</p>
-          <p>A atuação parte do processo existente, e não de uma tese escolhida de antemão. Primeiro são reconstruídos os fatos e a sequência processual. Depois são identificadas as questões capazes de alterar a posição do cliente. Só então a estratégia é definida, como uma narrativa única em que cada argumento tem lugar e momento: o que alegar, quando e em qual peça.</p>
-        </div>
-      </div>
-
-      <div class="duas">
-        <div class="cabeca">
-          <p class="rotulo">Primeiro contato</p>
-          <h3>O que reunir para a análise inicial</h3>
-          <p>A análise inicial parte do número do processo e dos principais documentos da cobrança, da autuação ou da investigação.</p>
-        </div>
-        <dl class="reunir">
-          <div><dt>Execução bancária</dt><dd>Contrato, aditivos, demonstrativos do débito e documentos das garantias.</dd></div>
-          <div><dt>Execução fiscal</dt><dd>Certidão de dívida ativa, processo de execução e, quando necessário, o processo administrativo que originou o crédito.</dd></div>
-          <div><dt>Penal</dt><dd>Processo administrativo fiscal, inquérito ou denúncia e os documentos societários da época dos fatos.</dd></div>
-        </dl>
-      </div>
-      <p class="prazo">Em processos em andamento, a data da citação, da intimação ou da ciência do ato permite verificar desde logo os prazos em curso.</p>
-    </div>
-  </section>
-
-  <section class="faixa tom" id="perguntas">
+  <section class="faixa" id="perguntas">
     <div class="wrap">
       <div class="duas">
         <div class="cabeca">
           <p class="rotulo">Informação</p>
           <h2>Perguntas frequentes</h2>
-          <p>Respostas gerais, de caráter informativo. A situação de cada processo só pode ser avaliada com os documentos.</p>
+          <p>Respostas gerais, de caráter informativo. Cada processo só pode ser avaliado com os documentos.</p>
         </div>
-        <div class="perguntas grupo-perguntas">
+        <details class="caixa">
+          <summary><span>Ver as perguntas</span><span class="conta" data-conta></span></summary>
+          <div class="perguntas grupo-perguntas">
           <div>
             <span class="rotulo">Antes do vencimento</span>
             <details>
@@ -564,7 +581,7 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
               <summary>Devo assinar a renegociação ou a confissão de dívida proposta pelo banco?</summary>
               <p>Pode ser uma solução, mas o documento costuma incorporar encargos ao saldo, criar um novo título executivo e pedir garantias adicionais de sócios, cônjuges ou outras empresas. Antes de assinar, é preciso saber o que se está reconhecendo e quem passa a responder.</p>
             </details>
-                      </div>
+          </div>
           <div>
             <span class="rotulo">Tributos e matéria penal</span>
             <details>
@@ -611,12 +628,13 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
               <p>Pode. É a prescrição intercorrente: frustrada a localização do devedor ou de bens penhoráveis, o prazo passa a correr e só se interrompe com citação, intimação ou constrição efetivas. As regras não são as mesmas na execução civil e na fiscal, e a contagem exige o exame do andamento do processo.</p>
             </details>
           </div>
-        </div>
+          </div>
+        </details>
       </div>
     </div>
   </section>
 
-  <section class="faixa" id="sobre">
+  <section class="faixa tom" id="sobre">
     <div class="wrap">
       <div class="sobre-grid">
         <div class="sobre-texto">
@@ -636,7 +654,7 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
     </div>
   </section>
 
-  <section class="faixa tom" id="contato">
+  <section class="faixa" id="contato">
     <div class="wrap">
       <div class="cabeca">
         <p class="rotulo">Contato</p>
@@ -686,7 +704,7 @@ h1 { font-size: clamp(3rem, 7.4vw, 5.75rem); line-height: 0.98; letter-spacing: 
 (function () {
   var links = Array.prototype.slice.call(document.querySelectorAll('.menu a'));
   if (!('IntersectionObserver' in window) || !links.length) return;
-  var secao = { inicio: null, situacoes: 'atuacao', antes: 'atuacao', atuacao: 'atuacao', metodo: 'metodo', conducao: 'metodo', perguntas: 'metodo', sobre: 'sobre', contato: 'contato' };
+  var secao = { inicio: null, situacoes: 'atuacao', antes: 'atuacao', atuacao: 'atuacao', metodo: 'metodo', perguntas: 'metodo', sobre: 'sobre', contato: 'contato' };
   var mapa = {};
   links.forEach(function (a) { mapa[a.getAttribute('href').slice(1)] = a; });
   var obs = new IntersectionObserver(function (entradas) {
@@ -711,6 +729,16 @@ document.addEventListener('click', function (ev) {
   var det = alvo && alvo.querySelector('details.mais');
   if (det) det.open = true;
 });
+</script>
+<script>
+(function () {
+  var caixa = document.querySelector('.caixa');
+  if (!caixa) return;
+  var n = caixa.querySelectorAll('.perguntas details').length;
+  var c = caixa.querySelector('[data-conta]');
+  if (c) c.textContent = n + ' perguntas';
+  if (location.hash === '#perguntas') caixa.open = true;
+})();
 </script>
 </body>
 </html>
